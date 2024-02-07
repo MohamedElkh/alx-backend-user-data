@@ -14,10 +14,18 @@ PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
 
 def filter_datum(fields: List[str], redaction: str, message: str,
                  separator: str) -> str:
-    """this func to obfuscated log"""
+    """this func to obfuscated log message
+    args:
+        fields: to list of strings indicating fields to obfuscate
+        redaction: the field will be obfuscated to
+        message: log line to obfuscate
+        separator: character separating the fields
+    return:
+        the result of log message
+    """
     for fd in fields:
-        replace = "{}={}{}".format(fd, redaction, separator)
-        message = re.sub("{}=.*?{}".format(fd, separator), replace, message)
+        message = re.sub(fd+'=.*?'+separator, fd+'='+redaction+separator,
+                         message)
     return message
 
 
