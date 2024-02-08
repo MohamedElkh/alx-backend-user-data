@@ -79,16 +79,14 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     """this func to connect to mysql and we will be using
         many of paramteres right now.
     """
-    username = environ.get("PERSONAL_DATA_DB_USERNAME", "root")
-    password = environ.get("PERSONAL_DATA_DB_PASSWORD", "")
+    us = environ.get("PERSONAL_DATA_DB_USERNAME", "root")
+    pas = environ.get("PERSONAL_DATA_DB_PASSWORD", "")
 
-    host = environ.get("PERSONAL_DATA_DB_HOST", "localhost")
-    db_name = environ.get("PERSONAL_DATA_DB_NAME")
+    ht = environ.get("PERSONAL_DATA_DB_HOST", "localhost")
+    db_n = environ.get("PERSONAL_DATA_DB_NAME")
 
-    conct = mysql.connector.connection.MySQLConnection(user=username,
-                                                       password=password,
-                                                       host=host,
-                                                       database=db_name)
+    conct = mysql.connector.connection.MySQLConnection(user=use, password=pas,
+                                                       host=ht, database=db_n)
     return conct
 
 
