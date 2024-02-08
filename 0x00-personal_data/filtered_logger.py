@@ -7,6 +7,7 @@ import re
 import logging
 import mysql.connector
 from typing import List
+from os import environ
 
 
 PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
@@ -78,14 +79,16 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     """this func to connect to mysql and we will be using
         many of paramteres right now.
     """
-    us = os.getenv('PERSONAL_DATA_DB_USERNAME') or "root"
-    pas = os.getenv('PERSONAL_DATA_DB_PASSWORD') or ""
+    username = environ.get("PERSONAL_DATA_DB_USERNAME", "root")
+    password = environ.get("PERSONAL_DATA_DB_PASSWORD", "")
 
-    hos = os.getenv('PERSONAL_DATA_DB_HOST') or "localhost"
-    db_nam = os.getenv('PERSONAL_DATA_DB_NAME')
+    host = environ.get("PERSONAL_DATA_DB_HOST", "localhost")
+    db_name = environ.get("PERSONAL_DATA_DB_NAME")
 
-    conct = mysql.connector.connect(user=us, password=pas,
-                                    host=hos, database=db_nam)
+    conct = mysql.connector.connection.MySQLConnection(user=username,
+                                                       password=password,
+                                                       host=host,
+                                                       database=db_name)
     return conct
 
 
