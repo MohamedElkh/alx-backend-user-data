@@ -1,21 +1,23 @@
 #!/usr/bin/env python3
-""" User module
+""" this model User module
 """
 import hashlib
 from models.base import Base
 
 
 class User(Base):
-    """ User class
+    """ this class to User class
     """
 
     def __init__(self, *args: list, **kwargs: dict):
-        """ Initialize a User instance
+        """ this func to Initialize a User instance
         """
         super().__init__(*args, **kwargs)
         self.email = kwargs.get('email')
         self._password = kwargs.get('_password')
+
         self.first_name = kwargs.get('first_name')
+
         self.last_name = kwargs.get('last_name')
 
     @property
