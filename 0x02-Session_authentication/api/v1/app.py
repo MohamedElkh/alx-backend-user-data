@@ -53,6 +53,7 @@ def bef_req():
             '/api/v1/forbidden/',
             '/api/v1/auth_session/login/'
         ]
+
         if auth.require_auth(request.path, excluded):
             cookie = auth.session_cookie(request)
 
@@ -87,4 +88,5 @@ def forbidden(error) -> str:
 if __name__ == "__main__":
     host = getenv("API_HOST", "0.0.0.0")
     port = getenv("API_PORT", "5000")
+
     app.run(host=host, port=port)

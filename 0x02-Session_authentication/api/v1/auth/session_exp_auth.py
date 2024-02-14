@@ -60,6 +60,7 @@ class SessionExpAuth(SessionAuth):
 
         if "created_at" not in user_details.keys():
             return None
+
         if self.session_duration <= 0:
             return user_details.get("user_id")
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" Module of Users views"""
+""" this Module of Users views"""
 from api.v1.views import app_views
 from flask import abort, jsonify, request
 from models.user import User
@@ -18,7 +18,7 @@ def view_all_users() -> str:
 
 @app_views.route('/users/<user_id>', methods=['GET'], strict_slashes=False)
 def view_one_user(user_id: str = None) -> str:
-    """ GET /api/v1/users/:id
+    """ func GET /api/v1/users/:id
     Path parameter:
       - User ID
     Return:
@@ -38,6 +38,7 @@ def view_one_user(user_id: str = None) -> str:
 
     if user is None:
         abort(404)
+
     if request.current_user is None:
         abort(404)
 
@@ -46,7 +47,7 @@ def view_one_user(user_id: str = None) -> str:
 
 @app_views.route('/users/<user_id>', methods=['DELETE'], strict_slashes=False)
 def delete_user(user_id: str = None) -> str:
-    """ DELETE /api/v1/users/:id
+    """ func to DELETE /api/v1/users/:id
     Path parameter:
       - User ID
     Return:
@@ -115,7 +116,6 @@ def update_user(user_id: str = None) -> str:
       - User ID
     JSON body:
       - last_name (optional)
-      - first_name (optional)
     Return:
       - User object JSON represent
     """
@@ -135,6 +135,7 @@ def update_user(user_id: str = None) -> str:
 
     if rj is None:
         return jsonify({'error': "Wrong format"}), 400
+
     if rj.get('first_name') is not None:
         user.first_name = rj.get('first_name')
     if rj.get('last_name') is not None:
