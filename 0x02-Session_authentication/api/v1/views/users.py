@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-""" func to Module of Users views
-"""
+""" Module of Users views"""
 from api.v1.views import app_views
 from flask import abort, jsonify, request
 from models.user import User
@@ -10,7 +9,7 @@ from models.user import User
 def view_all_users() -> str:
     """ func GET /api/v1/users
     Return:
-      - all User objects JSON represented
+      - list of all User objects JSON represented
     """
     all_users = [user.to_json() for user in User.all()]
 
@@ -19,7 +18,7 @@ def view_all_users() -> str:
 
 @app_views.route('/users/<user_id>', methods=['GET'], strict_slashes=False)
 def view_one_user(user_id: str = None) -> str:
-    """ func GET /api/v1/users/:id
+    """ GET /api/v1/users/:id
     Path parameter:
       - User ID
     Return:
@@ -33,14 +32,12 @@ def view_one_user(user_id: str = None) -> str:
             abort(404)
 
         user = request.current_user
-
         return jsonify(user.to_json())
 
     user = User.get(user_id)
 
     if user is None:
         abort(404)
-
     if request.current_user is None:
         abort(404)
 
@@ -49,7 +46,7 @@ def view_one_user(user_id: str = None) -> str:
 
 @app_views.route('/users/<user_id>', methods=['DELETE'], strict_slashes=False)
 def delete_user(user_id: str = None) -> str:
-    """ func DELETE /api/v1/users/:id
+    """ DELETE /api/v1/users/:id
     Path parameter:
       - User ID
     Return:
@@ -62,8 +59,8 @@ def delete_user(user_id: str = None) -> str:
 
     if user is None:
         abort(404)
-
     user.remove()
+
     return jsonify({}), 200
 
 
@@ -86,7 +83,6 @@ def create_user() -> str:
 
     except Exception as e:
         rj = None
-
     if rj is None:
         error_msg = "Wrong format"
     if error_msg is None and rj.get("email", "") == "":
@@ -108,20 +104,20 @@ def create_user() -> str:
             return jsonify(user.to_json()), 201
         except Exception as e:
             error_msg = "Can't create User: {}".format(e)
+
     return jsonify({'error': error_msg}), 400
 
 
 @app_views.route('/users/<user_id>', methods=['PUT'], strict_slashes=False)
 def update_user(user_id: str = None) -> str:
-    """ func PUT /api/v1/users/:id
+    """ PUT /api/v1/users/:id
     Path parameter:
       - User ID
     JSON body:
       - last_name (optional)
       - first_name (optional)
     Return:
-      - User object JSON represented
-      - 404 if the User ID doesn't exist
+      - User object JSON represent
     """
     if user_id is None:
         abort(404)
@@ -130,11 +126,10 @@ def update_user(user_id: str = None) -> str:
 
     if user is None:
         abort(404)
-
     rj = None
+
     try:
         rj = request.get_json()
-
     except Exception as e:
         rj = None
 
