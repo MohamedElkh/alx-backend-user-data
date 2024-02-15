@@ -7,7 +7,7 @@ from models.user import User
 
 @app_views.route('/users', methods=['GET'], strict_slashes=False)
 def view_all_users() -> str:
-    """ func GET /api/v1/users
+    """ func to GET /api/v1/users
     Return:
       - list of all User objects JSON represented
     """
@@ -71,8 +71,7 @@ def create_user() -> str:
     JSON body:
       - email
       - password
-      - last_name (optional)
-      - first_name (optional)
+      - last_name
     Return:
       - User object JSON represented
     """
@@ -86,10 +85,12 @@ def create_user() -> str:
         rj = None
     if rj is None:
         error_msg = "Wrong format"
+
     if error_msg is None and rj.get("email", "") == "":
         error_msg = "email missing"
     if error_msg is None and rj.get("password", "") == "":
         error_msg = "password missing"
+
     if error_msg is None:
 
         try:
@@ -103,6 +104,7 @@ def create_user() -> str:
 
             user.save()
             return jsonify(user.to_json()), 201
+
         except Exception as e:
             error_msg = "Can't create User: {}".format(e)
 

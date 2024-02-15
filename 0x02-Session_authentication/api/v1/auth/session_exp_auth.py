@@ -1,20 +1,14 @@
 #!/usr/bin/env python3
-"""
-func to Define SessionExpAuth class
-"""
+"""func to Define SessionExpAuth class"""
 import os
 from datetime import datetime, timedelta
 from .session_auth import SessionAuth
 
 
 class SessionExpAuth(SessionAuth):
-    """
-    class to Definition of class SessionExpAuth that adds an
-    """
+    """class to Definition of class SessionExpAuth that adds"""
     def __init__(self):
-        """
-        func to Initialize the class
-        """
+        """func to Initialize the class"""
         try:
             duration = int(os.getenv('SESSION_DURATION'))
 
@@ -69,4 +63,5 @@ class SessionExpAuth(SessionAuth):
 
         if allowed_window < datetime.now():
             return None
+
         return user_details.get("user_id")

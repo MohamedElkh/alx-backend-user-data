@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-"""
-this docs Definition of class BasicAuth
-"""
+"""this docs Definition of class BasicAuth"""
 import base64
 from .auth import Auth
 from typing import TypeVar
@@ -9,8 +7,7 @@ from models.user import User
 
 
 class BasicAuth(Auth):
-    """ class to Implement Basic Authorization protocol methods
-    """
+    """ class to Implement Basic Authorization protocol methods"""
     def extract_base64_authorization_header(self,
                                             authorization_header: str) -> str:
         """
@@ -31,9 +28,7 @@ class BasicAuth(Auth):
     def decode_base64_authorization_header(self,
                                            base64_authorization_header:
                                            str) -> str:
-        """
-        func to Decode a Base64-encoded string
-        """
+        """func to Decode a Base64-encoded string"""
         if base64_authorization_header is None:
             return None
 
@@ -51,9 +46,7 @@ class BasicAuth(Auth):
     def extract_user_credentials(self,
                                  decoded_base64_authorization_header:
                                  str) -> (str, str):
-        """
-        func user email and password from Base64 decoded value
-        """
+        """func user email and password from Base64 decoded value"""
         if decoded_base64_authorization_header is None:
             return (None, None)
 
@@ -70,9 +63,7 @@ class BasicAuth(Auth):
 
     def user_object_from_credentials(self, user_email: str,
                                      user_pwd: str) -> TypeVar('User'):
-        """
-        func User instance based on email and password
-        """
+        """func User instance based on email and password"""
         if user_email is None or not isinstance(user_email, str):
             return None
 
@@ -83,6 +74,7 @@ class BasicAuth(Auth):
 
             if not users or users == []:
                 return None
+
             for u in users:
                 if u.is_valid_password(user_pwd):
                     return u
@@ -92,9 +84,7 @@ class BasicAuth(Auth):
             return None
 
     def current_user(self, request=None) -> TypeVar('User'):
-        """
-        func to Returns a User instance based on a received request
-        """
+        """func to Returns a User instance based on a received"""
         Auth_header = self.authorization_header(request)
 
         if Auth_header is not None:

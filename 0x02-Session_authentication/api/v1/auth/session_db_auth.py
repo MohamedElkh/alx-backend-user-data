@@ -5,9 +5,7 @@ from models.user_session import UserSession
 
 
 class SessionDBAuth(SessionExpAuth):
-    """
-    func Definition of SessionDBAuth class that persists session data
-    """
+    """func Definition of SessionDBAuth class that persists"""
     def create_session(self, user_id=None):
         """
         Create a Session ID for a user_id
@@ -45,9 +43,7 @@ class SessionDBAuth(SessionExpAuth):
         return None
 
     def destroy_session(self, request=None):
-        """
-        func to Destroy a UserSession instance based on a
-        """
+        """func to Destroy a UserSession instance based"""
         if request is None:
             return False
 

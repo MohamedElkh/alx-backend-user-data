@@ -1,16 +1,12 @@
 #!/usr/bin/env python3
-"""
-this model Definition of class Auth
-"""
+"""this model Definition of class Auth"""
 import os
 from flask import request
 from typing import List, TypeVar
 
 
 class Auth:
-    """
-    class to Manages the API authentication
-    """
+    """class to Manages the API authentication"""
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """
         Determines whether a given path requires authentication or not
@@ -30,23 +26,21 @@ class Auth:
             return False
 
         else:
-            for i in excluded_paths:
-                if i.startswith(path):
+            for x in excluded_paths:
+                if x.startswith(path):
                     return False
 
-                if path.startswith(i):
+                if path.startswith(x):
                     return False
 
-                if i[-1] == "*":
-                    if path.startswith(i[:-1]):
+                if x[-1] == "*":
+                    if path.startswith(x[:-1]):
                         return False
 
         return True
 
     def authorization_header(self, request=None) -> str:
-        """
-        func to Returns the authorization header from a request object
-        """
+        """func to Returns the authorization header from a request"""
         if request is None:
             return None
 
@@ -58,9 +52,7 @@ class Auth:
         return header
 
     def current_user(self, request=None) -> TypeVar('User'):
-        """
-        func Returns a User instance from information from a request object
-        """
+        """func Returns a User instance from information from"""
         return None
 
     def session_cookie(self, request=None):

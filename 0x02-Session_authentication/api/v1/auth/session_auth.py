@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-"""
-func to Definition of class SessionAuth
-"""
+"""func to Definition of class SessionAuth"""
 import base64
 from uuid import uuid4
 from typing import TypeVar
@@ -10,8 +8,7 @@ from models.user import User
 
 
 class SessionAuth(Auth):
-    """ func to Implement Session Authorization protocol methods
-    """
+    """ func to Implement Session Authorization protocol"""
     user_id_by_session_id = {}
 
     def create_session(self, user_id: str = None) -> str:
@@ -59,9 +56,7 @@ class SessionAuth(Auth):
         return user
 
     def destroy_session(self, request=None):
-        """
-        func to Deletes a user session
-        """
+        """func to Deletes a user session"""
         if request is None:
             return False
 

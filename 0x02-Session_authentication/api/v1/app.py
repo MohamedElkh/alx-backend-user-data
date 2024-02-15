@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-"""
-func to Route module for the API
-"""
+"""func to Route module for the API"""
 from os import getenv
 from api.v1.views import app_views
 from flask import Flask, jsonify, abort, request
@@ -73,15 +71,13 @@ def not_found(error) -> str:
 
 @app.errorhandler(401)
 def unauthorized(error) -> str:
-    """ func to Request unauthorized handler
-    """
+    """ func to Request unauthorized handler"""
     return jsonify({"error": "Unauthorized"}), 401
 
 
 @app.errorhandler(403)
 def forbidden(error) -> str:
-    """ func to Request unauthorized handler
-    """
+    """ func to Request unauthorized handler"""
     return jsonify({"error": "Forbidden"}), 403
 
 
